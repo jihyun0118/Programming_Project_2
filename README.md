@@ -1,6 +1,5 @@
 # Programming Project 2 <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
-> Welcome to Programming Project 2
 > Programming Project 2 aims to generate a Recursion Tree. The algorithm will accept as input 
 > the following recurrence functions:
 > 
