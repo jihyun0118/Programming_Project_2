@@ -38,7 +38,7 @@ IDE used - Eclipse / Compiler used - JDT / Programming Language - Java
   5. Console will output resulting Recursion Tree.
 
 ## List of Files in Submission:
-Programming-Project-1 includes 
+Programming-Project-2 includes 
 1. Three .java files (ImprovedRecTree.java, Rational.java, RationalNumbers.java)
 2. Algorithm written in pseudocode (.PDF)
 3. Trace Runs (.txt)
