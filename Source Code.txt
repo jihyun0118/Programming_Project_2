@@ -1,0 +1,138 @@
+package program1;
+
+import java.util.Scanner;
+/*
+ * class ImprovedRecTree generates a Recursion Tree for divide-and-conquer or
+ * chip-and-be-conquered recurrence functions. User will input desired a, b, c, d 
+ * values and choose between a D&C or CABC. Console will output the desired
+ * Recursion Tree with depth of 4.
+ * 
+ */
+public class ImprovedRecTree
+{	// CABC algorithm T(n) = aT(n - b) + f(n)
+	public static void chipAndBeConquered(int a, int b, Rational c, Rational d) 
+	{
+		for (int i = 0; i <= 4; i++) 
+		{
+			// total nonrecursive cost per depth
+			String totalNonrecursiveCost;
+			Rational aRational = new Rational(a, 1);
+			Rational coefficient = aRational.expon(new Rational(i, 1)).multiply(c);
+			int reduction = b * i;
+			String reduc = String.valueOf(reduction);
+			totalNonrecursiveCost = coefficient.toString() + "(n - " + reduc + ")^" + "(" + d.toString() + ")" + "    ";
+			// nonrecursive cost per node
+			String nonRecursiveCost = "(n - " + reduc + ")^" + "(" + d.toString() + ")" + "    ";
+			System.out.println("Total Nonrecursive Cost: " + totalNonrecursiveCost);
+			System.out.println("Nonrecursive Cost per Node: " + nonRecursiveCost);
+			// create the string for each node in the ith row
+			String nodeString;
+			nodeString = "[ T(n - " + reduc + ")| " + c.toString() + "(n - " + reduc + ")^" + "(" + d.toString() + ")"  + "]";
+			System.out.println(coefficient + " Node(s) of ..." + nodeString + " for depth = " + i);
+			System.out.println("\n");
+		}
+	}
+
+	// DAC algorithm T(n) = aT(n/b) + f(n)
+	public static void divideAndConquer(int a, Rational b, Rational c, Rational d) 
+	{
+		for (int i = 0; i <= 4; i++) 
+		{
+			// total nonrecursive cost per depth
+			String totalNonrecursiveCost;
+			Rational aRational = new Rational(a, 1);
+			Rational coefficient = aRational.expon(new Rational(i, 1)).multiply(c);
+			Rational denominator = b.expon(new Rational(i, 1));
+			totalNonrecursiveCost = coefficient.toString() + "(n/" + "(" + denominator.toString() + ")" + ")^"
+					+ d.toString() + "    ";
+			// nonrecursive cost per node
+			String nonRecursiveCost = "(n/" + denominator.toString() + ")^" + d.toString() + "    ";
+			System.out.println("Total Nonrecursive Cost: " + totalNonrecursiveCost);
+			System.out.println("Nonrecursive Cost per Node: " + nonRecursiveCost);
+			// each node in the ith row
+			String nodeString;
+			nodeString = "[ T(n/" + denominator.toString() + ") | " + c.toString() + "(n/" + "("
+					+ denominator.toString() + ")" + ")^" + d.toString() + "]";
+			System.out.println(coefficient + " Node(s) of ..." + nodeString + " for depth = " + i);
+			System.out.println("\n");
+		}
+	}
+
+	// exponentiate integer values
+	public static int exponentiate(int a, int n) 
+	{
+		if (n == 0)
+			return 1;
+		return a * exponentiate(a, n - 1);
+	}
+
+	public static void main(String[] args) 
+	{
+		int userChoice = 0;
+		int a;
+		int c1;
+		int c2;
+		int d1;
+		int d2;
+
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Welcome to Recursion Tree Generator.");
+		System.out.println("Please input 1 for Divide & Conquer OR 2 for Chip-and-Be-Conquered: ");
+		userChoice = sc.nextInt();
+		if (userChoice == 1) 
+		{
+			int b1;
+			int b2;
+			System.out.println("\tD&C is in the form: T(n) = aT(n/b) + f(n)");
+			System.out.println("\tf(n) = a polynomial where cn^d");
+			System.out.println("\ta is an integer  >= 1 ");
+			System.out.println("\tb is an rational number > 1");
+			System.out.println("\tc is a rational number where 0 < c < infinity ");
+			System.out.println("\td is a rational number where 0 < d < infinity");
+			System.out.println("\tRational numbers will input NUMERATOR first, then DENOMINATOR second.");
+			System.out.println("\nPlease input desired a, b, c, d values.");
+			a = sc.nextInt();
+			b1 = sc.nextInt();
+			b2 = sc.nextInt();
+			c1 = sc.nextInt();
+			c2 = sc.nextInt();
+			d1 = sc.nextInt();
+			d2 = sc.nextInt();
+			System.out.println("\nYour inputs are: \na = " + a + "\nb = " + b1 + "/" + b2 + "\nc = " + c1 + "/" + c2
+					+ "\nd = " + d1 + "/" + d2);
+			Rational bb = new Rational(b1, b2);
+			Rational cc = new Rational(c1, c2);
+			Rational dd = new Rational(d1, d2);
+			System.out.println("-----------------------------------------------------------");
+			System.out.println("\nGenerating D&C Recursion Tree.\n");
+			divideAndConquer(a, bb, cc, dd);
+
+		} 
+		else if (userChoice == 2) 
+		{
+			int b1;
+			System.out.println("\tCABC is in the form: T(n) = aT(n - b) + f(n)");
+			System.out.println("\tf(n) = a polynomial where cn^d");
+			System.out.println("\ta is an integer  >= 1 ");
+			System.out.println("\tb is an integer > 0");
+			System.out.println("\tc is a rational number where 0 < c < infinity ");
+			System.out.println("\td is a rational number where 0 < d < infinity");
+			System.out.println("\tRational numbers will input NUMERATOR first, then DENOMINATOR second.");
+			System.out.println("\nPlease input desired a, b, c, d values.");
+			a = sc.nextInt();
+			b1 = sc.nextInt();
+			c1 = sc.nextInt();
+			c2 = sc.nextInt();
+			d1 = sc.nextInt();
+			d2 = sc.nextInt();
+			sc.close();
+			System.out.println("\nYour inputs are: \na = " + a + "\nb = " + b1 + "\nc = " + c1 + "/" + c2 + "\nd = "
+					+ d1 + "/" + d2);
+			Rational cc = new Rational(c1, c2);
+			Rational dd = new Rational(d1, d2);
+			System.out.println("-----------------------------------------------------------");
+			System.out.println("\nGenerating CABC Recursion Tree.\n");
+			chipAndBeConquered(a, b1, cc, dd);
+		}
+	}
+}
