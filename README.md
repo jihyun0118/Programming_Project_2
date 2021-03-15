@@ -39,9 +39,8 @@ IDE used - Eclipse / Compiler used - JDT / Programming Language - Java
 
 ## List of Files in Submission:
 Programming-Project-2 includes 
-1. Three .java files (ImprovedRecTree.java, Rational.java, RationalNumbers.java)
+1. Two .java files (ImprovedRecTree.java, Rational.java)
 2. Algorithm written in pseudocode (.PDF)
-3. Trace Runs (.txt)
-4. Test Runs to measure asymptotic complexity (.txt)
+
 
 
